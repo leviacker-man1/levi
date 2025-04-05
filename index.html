@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeBron Sites</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #1a001a, #0a001a);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      position: relative;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(128, 0, 128, 0.2) 20%, transparent 70%), radial-gradient(circle, rgba(255, 0, 255, 0.1) 10%, transparent 50%);
+      background-position: center;
+      animation: pulse 10s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    body::after {
+      animation-delay: 5s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.4;
+      }
+      100% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    header {
+      font-size: 3rem;
+      color: #d400ff;
+      text-shadow: 0 0 10px #d400ff, 0 0 20px #d400ff;
+      margin-bottom: 30px;
+      z-index: 2;
+      animation: flicker 2s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 22%, 24%, 55% {
+        opacity: 0.4;
+      }
+    }
+
+    main {
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid #aa00ff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px #aa00ff;
+      backdrop-filter: blur(10px);
+      animation: fadeIn 2s ease forwards;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .neon-text {
+      font-size: 1.4rem;
+      color: #ff00ff;
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+      text-align: center;
+    }
+
+    label {
+      font-size: 1.2rem;
+      color: #ffccff;
+      margin-bottom: 5px;
+    }
+
+    select, input[type="text"] {
+      padding: 15px 30px;
+      font-size: 16px;
+      border: 2px solid #ff00ff;
+      background: transparent;
+      color: #ffccff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+
+    select:hover, input[type="text"]:hover {
+      background: #ff00ff;
+      color: #000;
+      box-shadow: 0 0 25px #ff00ff;
+    }
+
+    select:focus, input[type="text"]:focus {
+      outline: none;
+      box-shadow: 0 0 30px #ff00ff;
+    }
+
+    .ui-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    footer {
+      font-size: 1rem;
+      color: #ffccff;
+      margin-top: 20px;
+    }
+
+    footer a {
+      color: #ff00ff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    const translations = {
+      en: { welcome: "Explore the most elite sites in a purple neon dimension.", sites: "Sites:", language: "Language:" },
+      es: { welcome: "Explora los sitios más elitistas en una dimensión neón púrpura.", sites: "Sitios:", language: "Idioma:" },
+      fr: { welcome: "Découvrez les sites les plus élites dans une dimension néon violette.", sites: "Sites :", language: "Langue :" },
+      de: { welcome: "Erkunde die elitärsten Seiten in einer lila Neon-Dimension.", sites: "Webseiten:", language: "Sprache:" },
+      cn: { welcome: "探索紫色霓虹维度中的精英网站。", sites: "网站：", language: "语言：" }
+    };
+
+    const allLanguages = {
+      en: "English",
+      es: "Español",
+      fr: "Français",
+      de: "Deutsch",
+      cn: "中文",
+      jp: "日本語",
+      ru: "Русский",
+      it: "Italiano",
+      ar: "العربية",
+      pt: "Português",
+      hi: "हिन्दी",
+      ko: "한국어"
+    };
+
+    function goToSite(select) {
+      const url = select.value;
+      if (url) window.open(url, '_blank');
+    }
+
+    function setLanguage(select) {
+      const lang = select.value;
+      const t = translations[lang] || translations["en"];
+      document.querySelector(".neon-text").textContent = t.welcome;
+      document.querySelector("label[for='siteSelector']").textContent = t.sites;
+      document.querySelector("label[for='languageSelector']").textContent = t.language;
+    }
+
+    window.onload = () => setLanguage(document.getElementById("languageSelector"));
+  </script>
+</head>
+<body>
+  <div class="background-blobs">
+    <div class="blob"></div>
+    <div class="blob"></div>
+    <div class="blob"></div>
+  </div>
+  <header>LeBron Sites</header>
+  <main>
+    <p class="neon-text">Explore the most elite sites in a purple neon dimension.</p>
+    <div class="ui-section">
+      <label for="siteSelector">Sites:</label>
+      <select id="siteSelector" onchange="goToSite(this)">
+        <option value="">-- Select a Site --</option>
+        <option value="https://example1.com">Example Site 1</option>
+        <option value="https://example2.com">Example Site 2</option>
+        <option value="https://example3.com">Example Site 3</option>
+      </select>
+    </div>
+    <div class="ui-section">
+      <label for="languageSelector">Language:</label>
+      <select id="languageSelector" onchange="setLanguage(this)">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="cn">中文</option>
+      </select>
+    </div>
+  </main>
+  <footer>
+    <p>Contact: <a href="https://discord.gg/bKYjQaN9fb" target="_blank">Join our Discord</a></p>
+  </footer>
+</body>
+</html>
